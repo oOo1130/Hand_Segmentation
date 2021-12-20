@@ -25,10 +25,10 @@ path_y = 'Data/Y2/'
 total = 0
 #for pos in range(len(path_x)):
 for img in sorted(os.listdir(path_x))[:-5]:
-    image_x = cv2.imread(path_x+img, cv2.IMREAD_UNCHANGED)
+    image_x = cv2.imread(path_x+img, 3)
     dim = (128,128)
     originalIm = cv2.resize(image_x, dim, interpolation = cv2.INTER_AREA)
-    image_y = cv2.imread(path_y+img, cv2.IMREAD_UNCHANGED)
+    image_y = cv2.imread(path_y+img, 3)
     segmentedIm = cv2.resize(image_y, dim, interpolation = cv2.INTER_AREA)
 
     for angle in angles:
@@ -47,9 +47,10 @@ for img in sorted(os.listdir(path_x))[:-5]:
             total+=1
 
 X_test = np.zeros((5,128,128,3))
-tests = ["A-train0101.jpg","A-train0102.jpg","A-train0103.jpg","A-train0104.jpg","A-train0105.jpg"]
+# tests = ["A-train0101.jpg","A-train0102.jpg","A-train0103.jpg","A-train0104.jpg","A-train0105.jpg"]
+tests = sorted(os.listdir(path_x))[-5:]
 for pos in range(len(tests)):
-    X_test[pos] = cv2.imread(path_x+tests[pos])
+    X_test[pos] = cv2.imread(path_x+tests[pos], 3)
 X_train-=128.0
 X_train/=128.0
 y_train-=128.0
